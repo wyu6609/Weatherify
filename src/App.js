@@ -1,6 +1,7 @@
 import react, { useState, useEffect } from "react";
 import "./App.css";
 import NavbarComponent from "./components/NavbarComponent";
+import { Spinner } from "react-bootstrap";
 
 import Today from "./routes/Today";
 import Weekly from "./routes/Weekly";
@@ -33,7 +34,9 @@ function App() {
       );
       console.log(resp.data);
       setWeather(resp.data);
-      setLoading(true);
+      setTimeout(() => {
+        setLoading(true);
+      }, 1000);
     } catch (err) {
       // Handle Error Here
       console.error(err);
@@ -43,16 +46,23 @@ function App() {
   return (
     <>
       <NavbarComponent />
-      <Routes>
-        <Route
-          path="/"
-          element={<Today weather={weather} loading={loading} />}
-        />
-        <Route
-          path="/weekly"
-          element={<Weekly weather={weather} loading={loading} />}
-        />
-      </Routes>
+      {loading ? (
+        <Routes>
+          <Route path="/" element={<Today weather={weather} />} />
+          <Route path="/weekly" element={<Weekly weather={weather} />} />
+        </Routes>
+      ) : (
+        <div className="d-flex align-items-center my-auto">
+          <Spinner
+            style={{ width: "10", height: "10" }}
+            animation="grow"
+            variant="success"
+            className="mx-auto"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      )}
     </>
   );
 }

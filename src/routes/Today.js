@@ -1,17 +1,17 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
+import { Card, Row, Col } from "react-bootstrap";
 
 const Today = ({ weather, loading }) => {
-  console.log(loading);
   return (
     <div className="d-flex justify-content-center mt-5 ">
       <Card style={{ width: "18rem" }} className="shadow">
-        <Card.Header>
+        <Card.Header className="text-center">
           <Card.Title>
             {weather?.location.name}, {weather?.location.region}
           </Card.Title>
-          <span>
-            <img src="" />
+          <span className="d-flex justify-content-center">
+            <p>{weather?.current.condition.text}</p>
+            <img src={weather?.current.condition.icon} />
           </span>
           <Card.Title>
             {weather?.location.lat}, {weather?.location.lon}
