@@ -67,7 +67,7 @@ function App() {
   const fetchWeather = async () => {
     try {
       const resp = await axios.get(
-        `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=10&aqi=no&alerts=no`
+        `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=10&aqi=no&alerts=no`
       );
       console.log(resp.data);
       setWeather(resp.data);
