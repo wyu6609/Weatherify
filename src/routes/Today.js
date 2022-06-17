@@ -4,7 +4,7 @@ import { Card, Row, Col } from "react-bootstrap";
 const Today = ({ weather, loading }) => {
   return (
     <div className="d-flex justify-content-center mt-5 ">
-      <Card style={{ width: "18rem" }} className="shadow">
+      <Card style={{ width: "23rem" }} className="shadow-lg">
         <Card.Header className="text-center">
           <Card.Title>
             {weather?.location.name}, {weather?.location.region}
