@@ -14,6 +14,12 @@ const lat = "40.593081";
 const lon = "-73.974021";
 const zipCode = "11223";
 function App() {
+  //set loading
+  const [loading, setLoading] = useState(false);
+  //Weather JSON state
+  const [weather, setWeather] = useState(null);
+  //onload get geolocation
+
   //on load fetch weather
   useEffect(() => {
     fetchWeather();
@@ -26,6 +32,8 @@ function App() {
         `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${zipCode}&days=10&aqi=no&alerts=no`
       );
       console.log(resp.data);
+      setWeather(resp.data);
+      setLoading(true);
     } catch (err) {
       // Handle Error Here
       console.error(err);
@@ -33,13 +41,19 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <>
       <NavbarComponent />
       <Routes>
-        <Route path="/" element={<Today />} />
-        <Route path="/weekly" element={<Weekly />} />
+        <Route
+          path="/"
+          element={<Today weather={weather} loading={loading} />}
+        />
+        <Route
+          path="/weekly"
+          element={<Weekly weather={weather} loading={loading} />}
+        />
       </Routes>
-    </div>
+    </>
   );
 }
 

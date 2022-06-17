@@ -1,6 +1,6 @@
 import React from "react";
 
-const Weekly = () => {
+const Weekly = ({ weather }) => {
   return <div>Weekly</div>;
 };
 
