@@ -10,10 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
 const apiKey = "f270ab85b7df432a894221127221406";
-const city = "new york";
-const lat = "40.593081";
-const lon = "-73.974021";
-const zipCode = "11223";
+
 function App() {
   // set longitude and latitude coordinates
   const [location, setLocation] = useState(null);
@@ -85,7 +82,7 @@ function App() {
 
   return (
     <>
-      <NavbarComponent />
+      <NavbarComponent setLocation={setLocation} />
       {loading ? (
         <Routes>
           <Route path="/" element={<Today weather={weather} />} />

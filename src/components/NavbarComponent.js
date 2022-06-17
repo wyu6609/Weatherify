@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Nav,
   Navbar,
@@ -9,8 +9,20 @@ import {
   FormControl,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-const NavbarComponent = () => {
+const NavbarComponent = ({ setLocation }) => {
   let navigate = useNavigate();
+  //set search term
+  const [searchTerm, setSearchTerm] = useState("");
+
+  //search input function
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLocation(searchTerm);
+  };
 
   return (
     <Navbar bg="light" expand="lg" className="shadow-none bg-light">
@@ -37,7 +49,7 @@ const NavbarComponent = () => {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
-            className="me-auto my-2 my-lg-0"
+            className="me-auto my-2 my-lg-0 text-center"
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
@@ -56,14 +68,15 @@ const NavbarComponent = () => {
               3 Days Forecast
             </Nav.Link>
           </Nav>
-          <Form className="d-flex ">
+          <Form onSubmit={handleSubmit} className="d-flex  mx-5">
             <FormControl
               type="search"
               placeholder="Enter zip code or city"
               className="me-2"
               aria-label="Search"
+              onChange={handleChange}
             />
-            <Button variant="outline-success">Search</Button>
+            <Button variant="success">Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>
