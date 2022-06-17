@@ -25,6 +25,12 @@ const Today = ({ weather, loading }) => {
           </Card.Text>
 
           <Card.Text>visibility: {weather?.current.vis_miles} miles</Card.Text>
+          <Card.Text
+            className="position-absolute bottom-0 end-0 text-muted"
+            style={{ fontSize: 10 }}
+          >
+            updated: {weather?.current.last_updated}
+          </Card.Text>
         </Card.Body>
       </Card>
     </div>

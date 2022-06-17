@@ -15,22 +15,62 @@ const lat = "40.593081";
 const lon = "-73.974021";
 const zipCode = "11223";
 function App() {
+  // set longitude and latitude coordinates
+  const [location, setLocation] = useState(null);
+
   //set loading
   const [loading, setLoading] = useState(false);
   //Weather JSON state
   const [weather, setWeather] = useState(null);
   //onload get geolocation
 
+  useEffect(() => {
+    // get geolocation on page load
+    checkGeoLocation();
+  }, []);
+  //check browser geo location function
+  function checkGeoLocation() {
+    if (navigator.geolocation) {
+      success();
+    } else {
+      handleLocationError(false);
+    }
+  }
+
+  function handleLocationError(browserHasGeolocation) {
+    let errorMessage = browserHasGeolocation
+      ? "ERROR: YOUR GEOLOCATION IS DISABLED "
+      : "ERROR: YOUR BROWSER DOESN'T SUPPORT GEOLOCATION SERVICE.";
+    alert(`${errorMessage} => Showing default city weather (NYC) instead`);
+    // setLatitude(40.7127837);
+    // setLongitude(-74.0059413);
+    setLocation(`40.7127837,-74.0059413`);
+  }
+
+  function success() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLocation(`${position.coords.latitude},${position.coords.longitude}`);
+
+        alert(
+          `Geolocation success! Your coordinates are ${position.coords.latitude}, ${position.coords.longitude}`
+        );
+      },
+      () => {
+        handleLocationError(true);
+      }
+    );
+  }
   //on load fetch weather
   useEffect(() => {
     fetchWeather();
-  }, []);
+  }, [location]);
 
   //fetch weather
   const fetchWeather = async () => {
     try {
       const resp = await axios.get(
-        `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${zipCode}&days=10&aqi=no&alerts=no`
+        `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=10&aqi=no&alerts=no`
       );
       console.log(resp.data);
       setWeather(resp.data);
