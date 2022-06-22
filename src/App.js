@@ -69,7 +69,7 @@ function App() {
       const resp = await axios.get(
         `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=10&aqi=no&alerts=no`
       );
-      console.log(resp.data);
+
       setWeather(resp.data);
       setTimeout(() => {
         setLoading(true);
