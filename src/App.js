@@ -2,7 +2,7 @@ import react, { useState, useEffect } from "react";
 import "./App.css";
 import NavbarComponent from "./components/NavbarComponent";
 import { Spinner } from "react-bootstrap";
-
+import "./routes/Weather.css";
 import Today from "./routes/Today";
 import Weekly from "./routes/Weekly";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -81,8 +81,14 @@ function App() {
   };
 
   return (
-    <>
+    <div
+      style={{
+        background: `url('https://source.unsplash.com/1600x900/?${location} no-repeat`,
+        backgroundSize: "cover",
+      }}
+    >
       <NavbarComponent setLocation={setLocation} />
+
       {loading ? (
         <Routes>
           <Route path="/" element={<Today weather={weather} />} />
@@ -100,7 +106,7 @@ function App() {
           </Spinner>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

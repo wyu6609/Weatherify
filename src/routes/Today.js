@@ -1,9 +1,10 @@
 import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
+import "./Weather.css";
 
 const Today = ({ weather, loading }) => {
   return (
-    <div className="d-flex justify-content-center mt-5 ">
+    <div className="d-flex justify-content-center mt-5 floating ">
       <Card style={{ width: "23rem" }} className="shadow-lg">
         <Card.Header className="text-center">
           <Card.Title>

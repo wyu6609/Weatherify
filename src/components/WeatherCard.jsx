@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 const WeatherCard = (props) => {
   const { date, avgTemp, avgHum, conditionText, conditionIcon } = props;
   return (
-    <Card style={{ width: "23rem" }} className="shadow-lg">
+    <Card style={{ width: "23rem" }} className="shadow-lg mx-1">
       <Card.Header className="text-center">
         <Card.Title>{date}</Card.Title>
         <span className="d-flex justify-content-center">

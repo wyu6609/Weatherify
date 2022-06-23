@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import WeatherCard from "../components/WeatherCard";
 const Weekly = ({ weather }) => {
-  console.log(weather.forecast.forecastday);
-  const threeDay = weather.forecast.forecastday.map((el) => {
+  const threeDay = weather.forecast.forecastday.map((el, index) => {
     return (
       <WeatherCard
+        Key={index}
         date={el.date}
         avgTemp={el.day.avgtemp_f}
         avgHum={el.day.avghumidity}
@@ -15,7 +15,7 @@ const Weekly = ({ weather }) => {
   });
 
   console.log(weather);
-  return <div>{threeDay}</div>;
+  return <div className="d-flex justify-content-center mt-5">{threeDay}</div>;
 };
 
 export default Weekly;
